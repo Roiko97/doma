@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace ="com.scholat.doma.dao.DocInfoDao">
+
+    <resultMap id="UserInfo" type="com.scholat.doma.entity.User">
+        <result property="teamName" column="team_name" javaType="String"/>
+        <result property="userName" column="user_name" javaType="String"/>
+        <result property="userId" column="user_id" javaType="String"/>
+    </resultMap>
+
+    <resultMap id="TeamInfo" type="com.scholat.doma.entity.Team">
+        <result property="teamId" column="team_id" javaType="String"/>
+        <result property="teamName" column="team_name" javaType="String"/>
+        <result property="userName" column="user_name" javaType="String"/>
+        <result property="userId" column="user_id" javaType="String"/>
+    </resultMap>
+
+    <resultMap id="DocInfo" type="com.scholat.doma.entity.DocInfo">
+        <result property="userId" column="user_id"/>
+        <result property="docId" column="doc_id"/>
+        <result property="pubTime" column="pub_time" javaType="java.util.Date"/>
+        <result property="docName" column="doc_name"/>
+        <result property="recommend" column="recommend"/>
+        <result property="style" column="style"/>
+        <result property="address" column="address"/>
+        <result property="existAnn" column="exit_ann"/>
+    </resultMap>
+
+    <select id="SelectByDocId" resultType="docInfo" resultMap="DocInfo">
+        SELECT * FROM docinfo WHERE doc_id = #{docId}
+    </select>
+
+    <select id="SelectByUserId" resultType="docInfo" resultMap="DocInfo">
+        SELECT d.user_id,d.doc_id,d.pub_time,d.doc_name,d.recommend,d.style,d.address,d.exist_ann
+        FROM docinfo d, users u
+        WHERE d.user_id = u.user_id AND d.user_id = #{userId}
+    </select>
+
+    <select id="SelectByDocName" resultType="docInfo" resultMap="DocInfo">
+        SELECT * FROM docinfo
+        WHERE doc_name = #{docName}
+    </select>
+
+    <insert id="AddDocInfo" parameterType="docInfo">
+        INSERT INTO docinfo(user_id,doc_id,pub_time,doc_name,recommend,style,address,exist_ann)
+        VALUES (#{userId},#{docId},#{pubTime},#{docName},#{recommend},#{style},#{address},#{existAnn})
+    </insert>
+
+    <delete id="DeleteDocInfoByDocId">
+        DELETE FROM docinfo WHERE doc_id = #{docId}
+    </delete>
+
+    <delete id="DeleteDocInfoByUserId">
+        DELETE FROM docinfo WHERE user_id = #{userId}
+    </delete>
+
+    <update id="UpdateDocInfoByDocId" parameterType="docInfo">
+        UPDATE docinfo
+        SET user_id = #{userId},pub_time = #{pubTime},
+        doc_name = #{docName},recommend = #{recommend},style = #{style},
+        address = #{address},exist_ann = #{existAnn}
+        WHERE doc_id = #{docId}
+    </update>
+
+
+
+</mapper>
