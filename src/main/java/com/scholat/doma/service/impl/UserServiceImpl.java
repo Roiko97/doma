@@ -4,6 +4,7 @@ import com.scholat.doma.dao.UserDao;
 import com.scholat.doma.entity.User;
 import com.scholat.doma.global.RandomID;
 import com.scholat.doma.service.UserService;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,16 @@ public class UserServiceImpl implements UserService {
        return userList;
     }
 
+    @Override
+    public User SelectUserById(String userId) {
+        return userDao.SelectUserById(userId);
+    }
+
+    @Override
+    public User SelectUserByName(String userName) {
+        return userDao.SelectUserByName(userName);
+    }
+
     /**
      * 创建用户
      * @param userName
@@ -55,4 +66,6 @@ public class UserServiceImpl implements UserService {
         Integer res = userDao.UpdateUserName(newUserName,userId);
         return res>0?1:-1;
     }
+
+
 }

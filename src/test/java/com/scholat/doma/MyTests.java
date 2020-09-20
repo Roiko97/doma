@@ -37,45 +37,23 @@ public class MyTests {
         //return stringBuffer;
     }
 
+
     @Test
-    public void UserTest(){
+    public void Test(){
         System.out.println(userService.SelectUser("浓",1));;
-    }
-
-    @Test
-    public void TeamTest(){
-
+        System.out.println(userService.SelectUserById("13"));
+        System.out.println(userService.SelectUserByName("塔图姆"));
 
         System.out.println(teamService.SelectAllUserFromTeam("002"));
-
         System.out.println(teamService.SelectById("003"));
 
-        System.out.println(teamService.DeleteTeam("005"));
-
-
-    }
-
-
-    @Test
-    public void DocInfoTest(){
 
         System.out.println(docInfoService.SelectByDocId("1"));
-
         System.out.println(docInfoService.SelectByUserId("13"));
-
-//        DocInfo docInfo = new DocInfo("123", "456", null, null, null, null, null, null);
-//        System.out.println(docInfoService.AddDocInfo(docInfo));
-//
-//        docInfoService.DeleteDocInfoByDocId("456");
-//
-//        docInfoService.DeleteDocInfoByUserId("123");
-//
-//        DocInfo docInfo = new DocInfo("145584", "3", null, "随便什么都好", null, null, null, null);
-//        System.out.println(docInfoService.UpdateDocInfoByDocId(docInfo));
-
-        System.out.println(docInfoService.SelectByDocName("地方"));
-
     }
+
+
+
 
 
 }
