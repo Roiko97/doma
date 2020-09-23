@@ -27,8 +27,8 @@
     </select>
 
     <insert id="InsertUser" parameterType="String">
-        INSERT INTO users
-        VALUES user_name =#{userName},user_id =#{userId}
+        INSERT INTO users(user_name, user_id)
+        VALUES (#{userName},#{userId})
     </insert>
 
     <update id="UpdateUserName" parameterType="String">

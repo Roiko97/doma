@@ -1,12 +1,20 @@
 package com.scholat.doma;
 
+import com.scholat.doma.controller.TeamController;
 import com.scholat.doma.entity.DocInfo;
 import com.scholat.doma.service.UserService;
 import com.scholat.doma.service.impl.DocInfoServiceImpl;
 import com.scholat.doma.service.impl.TeamServiceImpl;
+import org.attoparser.trace.MarkupTraceEvent;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder;
+
 
 import java.util.Random;
 
@@ -39,7 +47,15 @@ public class MyTests {
 
 
     @Test
-    public void Test(){
+    public void Test() throws Exception {
+        TeamController teamController = new TeamController();
+        MockMvc mockMvc = standaloneSetup(teamController).build();
+        mockMvc.perform(get("/selectTeam")).andExpect(view().name("index"));
+
+    }
+
+    @Test
+    public void Test01(){
         System.out.println(userService.SelectUser("浓",1));;
         System.out.println(userService.SelectUserById("13"));
         System.out.println(userService.SelectUserByName("塔图姆"));

@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
         String userId = randomID.GetRandomId("user");
         Integer res = userDao.InsertUser(userName,userId);
         return res>0?1:-1;
+
     }
 
     /**

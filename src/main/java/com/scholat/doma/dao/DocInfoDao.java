@@ -2,9 +2,11 @@ package com.scholat.doma.dao;
 
 import com.scholat.doma.entity.DocInfo;
 import org.apache.coyote.OutputBuffer;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface DocInfoDao {
 
     public DocInfo SelectByDocId(String docId);
