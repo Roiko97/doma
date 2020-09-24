@@ -1,8 +1,10 @@
 package com.scholat.doma.controller;
 
 
+import com.scholat.doma.entity.TeamMember;
 import com.scholat.doma.entity.User;
 import com.scholat.doma.service.DocInfoService;
+import com.scholat.doma.service.TeamMemberService;
 import com.scholat.doma.service.TeamService;
 import com.scholat.doma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class UserController {
     TeamService teamService;
     @Autowired
     DocInfoService docInfoService;
+    @Autowired
+    TeamMemberService teamMemberService;
 
     @RequestMapping("creatUser")
     public String addUser(){
@@ -42,6 +46,18 @@ public class UserController {
     }
 
 
+    @RequestMapping("joinTeam")
+    public String JoinTeam(TeamMember teamMember){
+        teamMemberService.Add(teamMember);
+        return "index";
+    }
+
+
+    @RequestMapping("quitTeam")
+    public String quitTeam(String userId,String teamId){
+        teamMemberService.quitUniqueTeam(userId,teamId);
+        return "index";
+    }
 
 
 }

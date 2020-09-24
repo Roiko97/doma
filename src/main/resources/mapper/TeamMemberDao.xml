@@ -30,6 +30,11 @@
     <delete id="DeleteByTeamId">
         DELETE FROM teammember WHERE team_id = #{teamId}
     </delete>
+    
+    <delete id="quitUniqueTeam">
+        DELETE FROM teammember
+        WHERE user_id = #{userId} AND team_id = #{teamId}
+    </delete>
 
     <update id="Update" parameterType="com.scholat.doma.entity.TeamMember" >
         UPDATE teammember SET user_name = #{userName},user_id = #{userId},team_name = #{teamName}

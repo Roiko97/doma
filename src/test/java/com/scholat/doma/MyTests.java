@@ -77,11 +77,13 @@ public class MyTests {
 //        System.out.println(docInfoService.SelectByDocId("1"));
 //        System.out.println(docInfoService.SelectByUserId("13"));
 
-        System.out.println(teamMemberService.SelectByTeamId("001"));
-        System.out.println(teamMemberService.Add(new TeamMember("005","whatever","aer","aer")));
-        System.out.println(teamMemberService.SelectAll());
-        System.out.println(teamMemberService.DeleteByTeamId("005"));
-        System.out.println(teamMemberService.Update(new TeamMember("003","whatever","aer","aer")));
+//        System.out.println(teamMemberService.SelectByTeamId("003"));
+//        System.out.println(teamMemberService.Add(new TeamMember("005","whatever","aer","aer")));
+//        System.out.println(teamMemberService.SelectAll());
+//        System.out.println(teamMemberService.DeleteByUserId("23"));
+//        System.out.println(teamMemberService.Update(new TeamMember("003","whatever","aer","aer")));
+
+        System.out.println(teamMemberService.quitUniqueTeam("012","003"));
     }
 
 

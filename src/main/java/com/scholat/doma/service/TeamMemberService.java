@@ -10,6 +10,7 @@ public interface TeamMemberService {
     public Integer Add(TeamMember teamMember);
     public Integer DeleteByUserId(String userId);
     public Integer DeleteByTeamId(String teamId);
+    public Integer quitUniqueTeam(String userId,String teamId);
     public Integer Update(TeamMember teamMember);
     public List<TeamMember> SelectAll();
     public List<TeamMember> SelectByUserId(String userId);

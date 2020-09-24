@@ -33,6 +33,11 @@ public class TeamMemberServiceImpl implements TeamMemberService {
     }
 
     @Override
+    public Integer quitUniqueTeam(String userId, String teamId) {
+        return teamMemberDao.quitUniqueTeam(userId,teamId);
+    }
+
+    @Override
     public Integer Update(TeamMember teamMember) {
         return teamMemberDao.Update(teamMember);
     }
