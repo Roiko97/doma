@@ -2,17 +2,18 @@ package com.scholat.doma.service.impl;
 
 import com.scholat.doma.dao.TeamDao;
 
-import com.scholat.doma.entity.TeamMember;
+
 import com.scholat.doma.entity.Team;
 import com.scholat.doma.entity.User;
 import com.scholat.doma.service.TeamService;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+
 public class TeamServiceImpl implements TeamService {
 
     @Autowired

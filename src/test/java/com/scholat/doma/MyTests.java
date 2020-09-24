@@ -2,12 +2,18 @@ package com.scholat.doma;
 
 import com.scholat.doma.controller.TeamController;
 import com.scholat.doma.entity.DocInfo;
+import com.scholat.doma.entity.TeamMember;
+import com.scholat.doma.service.DocInfoService;
+import com.scholat.doma.service.TeamMemberService;
+import com.scholat.doma.service.TeamService;
 import com.scholat.doma.service.UserService;
 import com.scholat.doma.service.impl.DocInfoServiceImpl;
+import com.scholat.doma.service.impl.TeamMemberServiceImpl;
 import com.scholat.doma.service.impl.TeamServiceImpl;
 import org.attoparser.trace.MarkupTraceEvent;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -25,10 +31,13 @@ public class MyTests {
     UserService userService;
 
     @Autowired
-    TeamServiceImpl teamService;
+    TeamService teamService;
 
     @Autowired
-    DocInfoServiceImpl docInfoService;
+    DocInfoService docInfoService;
+
+    @Autowired
+    TeamMemberService teamMemberService;
 
     @Test
     public void randomString(){
@@ -56,18 +65,24 @@ public class MyTests {
 
     @Test
     public void Test01(){
-        System.out.println(userService.SelectUser("浓",1));;
-        System.out.println(userService.SelectUserById("13"));
-        System.out.println(userService.SelectUserByName("塔图姆"));
 
-        System.out.println(teamService.SelectAllUserFromTeam("002"));
-        System.out.println(teamService.SelectById("003"));
+//        System.out.println(userService.SelectUser("浓",1));;
+//        System.out.println(userService.SelectUserById("13"));
+//        System.out.println(userService.SelectUserByName("塔图姆"));
+//
+//        System.out.println(teamService.SelectAllUserFromTeam("002"));
+//        System.out.println(teamService.SelectById("003"));
+//
+//
+//        System.out.println(docInfoService.SelectByDocId("1"));
+//        System.out.println(docInfoService.SelectByUserId("13"));
 
-
-        System.out.println(docInfoService.SelectByDocId("1"));
-        System.out.println(docInfoService.SelectByUserId("13"));
+        System.out.println(teamMemberService.SelectByTeamId("001"));
+        System.out.println(teamMemberService.Add(new TeamMember("005","whatever","aer","aer")));
+        System.out.println(teamMemberService.SelectAll());
+        System.out.println(teamMemberService.DeleteByTeamId("005"));
+        System.out.println(teamMemberService.Update(new TeamMember("003","whatever","aer","aer")));
     }
-
 
 
 

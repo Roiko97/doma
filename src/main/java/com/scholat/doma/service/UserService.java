@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Service
 public interface UserService {
     public List<User> SelectUser(String userName, Integer flag);
 
