@@ -8,10 +8,8 @@ import com.scholat.doma.service.TeamService;
 import com.scholat.doma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -34,13 +32,13 @@ public class TeamController {
     @RequestMapping("toCreatTeam")
     public String ToCreatTeam(Team team){
         teamService.insertTeam(team);
-        return "index";
+        return "login";
     }
 
     @RequestMapping("deleteTeam")
     public String DeleteTeam(@RequestParam("teamId")String teamId){
         teamService.DeleteTeam(teamId);
-        return "index";
+        return "login";
     }
 
 //    restful风格
@@ -59,21 +57,21 @@ public class TeamController {
     @RequestMapping("toUpdateTeam")
     public String ToUpdateTeam(Team team){
         teamService.updateTeam(team);
-        return "index";
+        return "login";
     }
 
     @RequestMapping("selectTeam")
     public String SelectTeam(@RequestParam(value = "teamId")String teamId, HttpSession session){
         Team team = teamService.SelectById(teamId);
         session.setAttribute("team",team);
-        return "index";
+        return "login";
     }
 
     @RequestMapping("selectAllUserFromTeam")
     public String SelectAllUserFromTeam(@RequestParam("teamId")String teamId,HttpSession session){
         List<User> userList = teamService.SelectAllUserFromTeam(teamId);
         session.setAttribute("userList",userList);
-        return "index";
+        return "login";
 
     }
 

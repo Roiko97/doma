@@ -2,17 +2,14 @@ package com.scholat.doma.controller;
 
 
 import com.scholat.doma.entity.TeamMember;
-import com.scholat.doma.entity.User;
 import com.scholat.doma.service.DocInfoService;
 import com.scholat.doma.service.TeamMemberService;
 import com.scholat.doma.service.TeamService;
 import com.scholat.doma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -49,14 +46,14 @@ public class UserController {
     @RequestMapping("joinTeam")
     public String JoinTeam(TeamMember teamMember){
         teamMemberService.Add(teamMember);
-        return "index";
+        return "login";
     }
 
 
     @RequestMapping("quitTeam")
     public String quitTeam(String userId,String teamId){
         teamMemberService.quitUniqueTeam(userId,teamId);
-        return "index";
+        return "login";
     }
 
 

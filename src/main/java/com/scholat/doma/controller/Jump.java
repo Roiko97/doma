@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
+@RequestMapping
 @Controller
 public class Jump {
 
@@ -22,18 +23,20 @@ public class Jump {
         return "login";
     }
 
-    @RequestMapping("/user/login")
-    public String Login(@RequestParam("userName") String userName, HttpSession session){
-        User user = userService.SelectUserByName(userName);
-        if (user != null){
-            session.setAttribute("user",user);
-            return "index";
-        }else {
-            session.setAttribute("msg","用户名或密码错误，请检查后再登录");
-            return "login";
-        }
+    @RequestMapping("/user/test")
+    public String test(@RequestParam("userName") String userName, HttpSession session){
+        System.out.println(userName);
+       // User user = userService.SelectUserByName(userName);
+        System.out.println("运行到这里了");
+        return "Summarize";
+//        if (user != null){
+//            session.setAttribute("user",user);
+//            return "login";
+//        }else {
+//            session.setAttribute("msg","用户名或密码错误，请检查后再登录");
+//            return "login";
+//        }
     }
-
     @RequestMapping("/user/logout")
     @ResponseBody
     public String Logout(HttpSession session, Model model){
