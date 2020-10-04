@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>pageInfo</title>
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script>
+        // $(document).ready(function (){
+        //     $.getJSON("http://localhost:8080/getYourDocInfo?userId=1",function (jsonData){
+        //         alert(jsonData.pageInfo.endRow);
+        //     });
+        // })
+
+        function getPage(){
+            var pagenum = $("#pagenum").val();
+            $.ajax({
+                type:"GET",
+                url: "http://localhost:8080/getYourDocInfo?userId=1",
+                data: {"pageNum":pagenum},
+                success: function(jsonData){
+                    alert(jsonData);
+                }
+            });
+            return false;
+        }
+    </script>
+
+</head>
+<body>
+
+    <input id="pagenum">
+    <button type="submit" onclick="getPage()">查询</button>
+
+
+<!--    <table class="gridtable">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th colspan="4">查询结果</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>文档ID</th>-->
+<!--            <th>文档名</th>-->
+<!--            <th>用户ID</th>-->
+<!--        </tr>-->
+
+<!--        </thead>-->
+<!--        <tr>-->
+<!--            <th th:text="${js}"></th>-->
+<!--        </tr>-->
+<!--    </table>-->
+</body>
+</html>
