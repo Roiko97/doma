@@ -1,6 +1,10 @@
 package com.scholat.doma.service.impl;
 
+import com.scholat.doma.dao.DocInfoDao;
+import com.scholat.doma.entity.DocInfo;
+import com.scholat.doma.global.RandomID;
 import com.scholat.doma.service.DocFileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -15,6 +19,8 @@ import java.net.URLEncoder;
 
 @Service
 public class DocFileServiceImpl implements DocFileService {
+
+
     @Override
     public ResponseEntity<Object> downloadFile(String filePath) throws UnsupportedEncodingException, FileNotFoundException {
         File file = new File(filePath);
@@ -36,4 +42,6 @@ public class DocFileServiceImpl implements DocFileService {
                 .body(resource);
         return responseEntity;
     }
+
+
 }

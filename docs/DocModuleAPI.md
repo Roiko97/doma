@@ -2,13 +2,13 @@
 
 ## 根据用户id查询文档信息
 
-- 描述：根据用户id查询文档信息，查询结果将会被分页，需要传入**当前页面的页码**与**每页的查询结果数量**，例如```pageNum=2```，```pageSize=5```，则会将返回查询结果的第2页的5跳记录。
+- **描述**：根据用户id查询文档信息，查询结果将会被分页，需要传入**当前页面的页码**与**每页的查询结果数量**，例如```pageNum=2```，```pageSize=5```，则会将返回查询结果的第2页的5跳记录。
 
-- 地址：http://localhost:8080//getYourDocInfo
+- **地址**：http://localhost:8080/getYourDocInfo
 
-- 请求方式：POST / GET
+- **请求方式**：POST / GET
 
-- 参数：
+- **参数**：
 
   | 字段           | 类型    | 说明                          | 必需 |
   | -------------- | ------- | ----------------------------- | ---- |
@@ -16,7 +16,7 @@
   | ```pageNum```  | Integer | 欲获得的页数，默认查出第1页   | 否   |
   | ```pageSize``` | Integer | 每一页的记录数，默认为4条记录 | 否   |
 
-- 返回值：
+- **返回值**：
 
   | 字段                    | 类型          | 说明                                                         |
   | ----------------------- | ------------- | ------------------------------------------------------------ |
@@ -121,5 +121,76 @@
 
   ---------------
 
+## 文档文件的上传
+
+- **描述**：根据用户id+文档名进行上传（后期也可以改形式，看前端需求）
+- **地址**：http://localhost:8080/upload
+- **请求方式**：POST
+- **参数**：
+  
+  | 字段          | 类型   | 说明   | 必需 |
+  | ------------- | ------ | ------ | ---- |
+  | ```userId```  | String | 用户ID | 是   |
+  | ```docName``` | String | 文档名 | 是   |
+  | ```file```    | file   | 文件   | 是   |
+
+- **返回值(暂时)：**
+
+  | 状态     | 返回页面           |
+  | -------- | ------------------ |
+  | 上传成功 | uploadSuccess.html |
+  | 上传失败 | error/400.html     |
+
+- **ajax示例：**
+
+  - 见```templates\test\Upload.html```
+
+  ```javascript
+  //从表单中获取文件生成FormData对象(表单中第一项)
+  var formData = new FormData();
+  var userId = $("#userId").val();
+  var docName = $("#docName").val();
+  //将用户id与文档id加入formData中
+  formData.append("file",document.getElementById("file").files[0]);
+  formData.append("userId",userId);
+  formData.append("docName",docName);
+  $.ajax({
+      type:"post",
+      url:"http://localhost:8080/upload",
+      async:true,
+      data:formData,
+      /**
+                       *必须false才会自动加上正确的Content-Type
+                       */
+      contentType: false,
+      /**
+                       * 必须false才会避开jQuery对 formdata 的默认处理
+                       * XMLHttpRequest会对 formdata 进行正确的处理
+                       */
+      processData: false,
+      success:function (data){
+          //看看客户端回传的数据
+          console.log(data);
+      }
+  ```
+
   
 
+
+----------
+
+## 文档文件的下载
+
+- **描述**：根据文档id进行下载
+
+- **地址**：http://localhost:8080/download
+
+- **请求方式**：GET
+
+- **参数**：
+
+  | 字段        | 类型   | 说明   | 必需 |
+  | ----------- | ------ | ------ | ---- |
+  | ```docId``` | String | 文档ID | 是   |
+
+- **返回值**：文件作为附件下载

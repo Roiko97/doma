@@ -94,6 +94,13 @@ public class DocInfo {
     public DocInfo() {
     }
 
+    public DocInfo(String userId, String docId, String docName, String address) {
+        this.userId = userId;
+        this.docId = docId;
+        this.docName = docName;
+        this.address = address;
+    }
+
     public DocInfo(String userId, String docId, Date pubTime, String docName, Integer recommend, String style, String address, Integer existAnn) {
         this.userId = userId;
         this.docId = docId;

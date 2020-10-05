@@ -20,6 +20,8 @@ public class RandomID {
             stringBuffer.append("user");
         }else if(style.equals("team")){
             stringBuffer.append("team");
+        }else if(style.equals("doc")){
+            stringBuffer.append("doc"); //文档id
         }else{
             stringBuffer.append("erro"); //错误前缀
         }

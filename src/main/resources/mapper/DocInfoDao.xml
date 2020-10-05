@@ -43,6 +43,11 @@
         WHERE doc_name = #{docName}
     </select>
 
+    <select id="SelectByUserIdAndDocName" resultType="docInfo" resultMap="DocInfo">
+        SELECT * FROM docinfo
+        WHERE user_id = #{userId} AND doc_name = #{docName}
+    </select>
+
     <insert id="AddDocInfo" parameterType="docInfo">
         INSERT INTO docinfo(user_id,doc_id,pub_time,doc_name,recommend,style,address,exist_ann)
         VALUES (#{userId},#{docId},#{pubTime},#{docName},#{recommend},#{style},#{address},#{existAnn})

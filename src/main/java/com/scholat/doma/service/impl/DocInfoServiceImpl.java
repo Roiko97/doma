@@ -2,6 +2,7 @@ package com.scholat.doma.service.impl;
 
 import com.scholat.doma.dao.DocInfoDao;
 import com.scholat.doma.entity.DocInfo;
+import com.scholat.doma.global.RandomID;
 import com.scholat.doma.service.DocInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,12 @@ public class DocInfoServiceImpl implements DocInfoService {
     }
 
     @Override
-    public Integer AddDocInfo(DocInfo docInfo) {
-        return docInfoDao.AddDocInfo(docInfo);
+    public DocInfo SelectByUserIdAndDocName(String userId, String docName) {
+        return docInfoDao.SelectByUserIdAndDocName(userId,docName);
     }
+
+    @Override
+    public Integer AddDocInfo(DocInfo docInfo) { return docInfoDao.AddDocInfo(docInfo);}
 
     @Override
     public Integer DeleteDocInfoByDocId(String docId) {

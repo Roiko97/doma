@@ -13,6 +13,8 @@ public interface DocInfoDao {
 
     public List<DocInfo> SelectByDocName(String docName);
 
+    public DocInfo SelectByUserIdAndDocName(String userId,String docName);
+
     public Integer AddDocInfo(DocInfo docInfo);
 
     public Integer DeleteDocInfoByDocId(String docId);
@@ -20,6 +22,8 @@ public interface DocInfoDao {
     public Integer DeleteDocInfoByUserId(String userId);
 
     public Integer UpdateDocInfoByDocId(DocInfo docInfo);
+
+
 
 
 

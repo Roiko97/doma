@@ -11,5 +11,13 @@ public class Jump {
         return "login";
     }
 
+    //测试分页
+    @RequestMapping("/page")
+    public String page(){return "pageInfoTest";}
+
+    //测试上传
+    @RequestMapping("/fileupload")
+    public String upload(){return "test/Upload";}
+
 
 }
