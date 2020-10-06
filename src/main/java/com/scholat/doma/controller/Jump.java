@@ -19,5 +19,9 @@ public class Jump {
     @RequestMapping("/fileupload")
     public String upload(){return "test/Upload";}
 
+    //测试新建文档
+    @RequestMapping("/testcreatedoc")
+    public String createDoc(){ return "test/CreateDoc"; }
+
 
 }

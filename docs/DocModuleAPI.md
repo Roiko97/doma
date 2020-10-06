@@ -120,10 +120,72 @@
   ```
 
   ---------------
+## 文档的创建
 
-## 文档文件的上传
+- **描述**：根据用户id+文档名进行文档记录的创建（包括了文件上传业务）
 
-- **描述**：根据用户id+文档名进行上传（后期也可以改形式，看前端需求）
+- **地址**：http://localhost:8080/createdoc
+
+- **请求方式**：POST
+
+- **参数**：
+
+  | 字段          | 类型   | 说明   | 必需 |
+  | ------------- | ------ | ------ | ---- |
+  | ```userId```  | String | 用户ID | 是   |
+  | ```docName``` | String | 文档名 | 是   |
+  | ```file```    | file   | 文件   | 是   |
+
+- **返回值(暂时)：**
+
+  | 状态     | 返回页面           |
+  | -------- | ------------------ |
+  | 上传成功 | uploadSuccess.html |
+  | 上传失败 | error/400.html     |
+
+- **ajax示例：**
+
+  - 见```templates\test\CreateDoc.html```
+
+  ```javascript
+  //从表单中获取文件生成FormData对象(表单中第一项)
+  var formData = new FormData();
+  var userId = $("#userId").val();
+  var docName = $("#docName").val();
+  //将用户id与文档id加入formData中
+  formData.append("file",document.getElementById("file").files[0]);
+  formData.append("userId",userId);
+  formData.append("docName",docName);
+  $.ajax({
+      type:"post",
+      url:"http://localhost:8080/createdoc",
+      async:true,
+      data:formData,
+      /**
+                       *必须false才会自动加上正确的Content-Type
+                       */
+      contentType: false,
+      /**
+                       * 必须false才会避开jQuery对 formdata 的默认处理
+                       * XMLHttpRequest会对 formdata 进行正确的处理
+                       */
+      processData: false,
+      success:function (data){
+          //看看客户端回传的数据
+          console.log(data);
+      }
+  ```
+
+  
+
+
+
+
+
+
+## 文档文件的重新上传
+
+- **描述**：根据用户id+文档名进行重新上传（后期也可以改形式，看前端需求）
 - **地址**：http://localhost:8080/upload
 - **请求方式**：POST
 - **参数**：

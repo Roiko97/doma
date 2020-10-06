@@ -5,6 +5,7 @@ import com.scholat.doma.entity.DocInfo;
 import com.scholat.doma.global.RandomID;
 import com.scholat.doma.service.DocFileService;
 import com.scholat.doma.service.DocInfoService;
+import com.scholat.doma.service.UserService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -34,10 +35,14 @@ public class DocUpAndDownController {
     @Autowired
     DocInfoService docInfoService;
 
+    @Autowired
+    UserService userService;
+
     //文件基础路径
     String BASEPATH = "E:\\\\DoMaFilesSpace\\";
 
     /**
+     * 用户更换文档对应文件
      * 由用户id+文档名查出文档记录，保存文件到本地后记录本地的文档地址，
      * 后期也可改成由用户id+文档id查找，看前端需求
      * @param multipartFile
@@ -104,6 +109,70 @@ public class DocUpAndDownController {
             System.out.println("没有上传文件！");
             return "error/400";
         }
+
+    }
+
+    /**
+     * 用户初次上传文档，则在数据库上更新记录
+     * @param multipartFile
+     * @param docName
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping("/createdoc")
+    private String createDoc(@RequestParam("file") MultipartFile multipartFile,
+                             @RequestParam(value = "userId") String userId,
+                             @RequestParam(value = "docName") String docName,
+                             HttpServletRequest httpServletRequest) throws IOException {
+        //TODO 验证是否有该用户
+        if(userService.SelectUserById(userId)==null) return "error/400";
+
+        //TODO 文档名若是不存在则设为上传的文件名
+        //获取原始文件名
+        String originalFilename = multipartFile.getOriginalFilename();
+        //若无文档名则直接使用文件名(去掉后缀名)
+        if(docName.isEmpty()) docName = originalFilename.split(".")[0];
+
+        //TODO 生成文档id
+        RandomID randomID = new RandomID();
+        String docId = randomID.GetRandomId("doc");
+
+        //TODO 生成存于服务器的文件名
+        //生成保存在文件名
+        String fileName = docId+"-"+ UUID.randomUUID()+"-"+originalFilename;
+
+        //TODO 生成完整路径
+        String filePath = BASEPATH + fileName;
+
+        //TODO 文件上传
+        System.out.println(multipartFile.getBytes());
+        if (!multipartFile.isEmpty()) {
+            //保存文件到本地
+            try {
+                FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), new File(filePath));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("文件上传成功！保存到了："+filePath);
+        }
+        else {
+            System.out.println("没有上传文件！");
+            return "error/400";
+        }
+        //TODO 生成服务器本地地址
+        String address = filePath;
+
+        //TODO 生成文档记录
+        DocInfo docInfo = new DocInfo(userId,docId,docName,address);
+
+        //TODO 插入文档记录
+        Integer res = docInfoService.AddDocInfo(docInfo);
+
+        //插入失败则跳转到500
+        if(res<0) return "error/500";
+
+        //上传好了之后返回成功
+        return "uploadSuccess";
 
     }
 
